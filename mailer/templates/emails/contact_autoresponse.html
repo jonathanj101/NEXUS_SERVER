@@ -1,0 +1,93 @@
+{% extends "emails/_base.html" %} {% block body %} {# optional preheader text for inbox preview #} {% if preheader %}{%
+else %} {% with pre="Thanks—we received your message. A member of our team will reply shortly." %} {% firstof preheader
+pre as _ %}{% endwith %} {% endif %}
+
+<h1 class="h1">Thanks {{ name | default:"" |yesno:", " }}{{ name|default:"there" }} — we got your message</h1>
+
+<p class="lead">
+    {% comment %} We’ve created a ticket for your request {% endcomment %} {% comment %} {% if ticket_id %} (ID: {{
+    ticket_id }}){% endif %}. {% endcomment %} {% comment %} {{ ticket_id | default_if_none: "" | yesno:" (ID: "
+    |add:ticket_id|add:")" }}. {% endcomment %} Our support hours are
+    <strong>Mon–Fri, 9:00am–6:00pm ET</strong>. You’ll usually hear back within
+    <strong>
+        {% if sla_text %}({{sla_text}}) {% else %} (1 business day) {%endif%} {% comment %} {{ sla_text | default:"1
+        business day" }} {% endcomment %} </strong
+    >.
+</p>
+
+{% if customer_message %}
+<div class="divider"></div>
+<p class="muted" style="margin: 0 0 6px">Your message</p>
+<blockquote
+    style="
+        margin: 0;
+        padding: 12px 14px;
+        background: #0f1626;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        color: #c9d2ea;
+    "
+>
+    {{ customer_message }}
+</blockquote>
+{% endif %}
+
+<table role="presentation" class="data-table" cellpadding="0" cellspacing="0">
+    {% if ticket_id %}
+    <tr>
+        <th width="140">Ticket ID</th>
+        <td>{{ ticket_id }}</td>
+    </tr>
+    {% endif %} {% if submitted_at %}
+    <tr>
+        <th>Received</th>
+        <td>{{ submitted_at }} UTC Timezone</td>
+    </tr>
+    {% endif %} {% if topic %}
+    <tr>
+        <th>Topic</th>
+        <td>{{ topic }}</td>
+    </tr>
+    {% endif %} {% if priority %}
+    <tr>
+        <th>Priority</th>
+        <td>{{ priority }}</td>
+    </tr>
+    {% endif %} {% if email %}
+    <tr>
+        <th>From</th>
+        <td>{{ name|default:"" }}{% if name and email %} &lt;{{ email }}&gt;{% else %}{{ email }}{% endif %}</td>
+    </tr>
+    {% endif %}
+</table>
+
+{% if ticket_url %}
+<a href="{{ ticket_url }}" class="btn btn-primary">View your request</a>
+{% endif %}
+
+<p class="lead" style="margin-top: 16px">
+    If you have more details to add, just reply to this email and it will update your ticket automatically.
+</p>
+
+<div class="divider"></div>
+
+<p class="muted">
+    Having an urgent issue {% comment %} {{ product_name | default: brand_name | default:"our platform" }} {% endcomment
+    %} ? Visit our
+    <a href="https://jjnexussolutions.com" style="color: #4b6cfa; text-decoration: none">status page</a>
+    {% comment %}
+    <a href="{{ status_url|default:'https://jjnexussolutions.com' }}" style="color: #4b6cfa; text-decoration: none"
+        >status page</a
+    >
+    {% endcomment %} or email
+
+    <a href="jjnexussolutions.com" style="color: #4b6cfa; text-decoration: none"> support@jjnexussolutions.com.</a>
+    {% comment %}
+    <a
+        href="mailto:{{ support_email|default:'support@jjnexussolutions.com' }}"
+        style="color: #4b6cfa; text-decoration: none"
+    >
+        {{ support_email|default:"support@jjnexussolutions.com" }}</a
+    >. {% endcomment %}
+</p>
+{% endblock %}

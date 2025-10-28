@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ subject }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- keep styles simple & email-safe; major colors inline-mirrored from your theme -->
+        <style>
+            /* layout */
+            .wrapper {
+                width: 100%;
+                background: #0a0f1a;
+                padding: 24px 0;
+            }
+            .container {
+                width: 600px;
+                max-width: 600px;
+                margin: 0 auto;
+                background: #121b30;
+                border-radius: 18px;
+                overflow: hidden;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            }
+            .header {
+                background: #0f1626;
+                color: #f7faff;
+                padding: 20px 24px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            }
+            .brand {
+                margin: 0;
+                font-weight: 700;
+                font-size: 18px;
+                letter-spacing: 0.2px;
+            }
+            .tagline {
+                margin: 4px 0 0;
+                color: #8c97b5;
+                font-size: 12px;
+            }
+            .content {
+                padding: 24px;
+                color: #c9d2ea;
+                font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            }
+            .h1 {
+                margin: 0 0 10px;
+                font-size: 20px;
+                color: #f7faff;
+            }
+            .lead {
+                margin: 0 0 16px;
+                font-size: 14px;
+                line-height: 1.6;
+                color: #c9d2ea;
+            }
+            .muted {
+                color: #8c97b5;
+                font-size: 12px;
+            }
+            .divider {
+                height: 1px;
+                background: rgba(255, 255, 255, 0.08);
+                margin: 12px 0;
+            }
+
+            /* table */
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 14px 0;
+            }
+            .data-table th,
+            .data-table td {
+                text-align: left;
+                padding: 8px 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                font-size: 13px;
+                color: #c9d2ea;
+            }
+            .data-table th {
+                color: #f7faff;
+            }
+
+            /* buttons */
+            .btn {
+                display: inline-block;
+                padding: 12px 18px;
+                border-radius: 18px;
+                text-decoration: none;
+                font-weight: 700;
+                border: 1px solid rgba(244, 197, 66, 0.45);
+            }
+            .btn-primary {
+                background: #f4c542;
+                color: #0b1020 !important;
+            }
+            .btn-secondary {
+                background: #4b6cfa;
+                color: #ffffff !important;
+                border-color: rgba(75, 108, 250, 0.35);
+            }
+
+            /* verification code box */
+            .vc-box {
+                font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+                font-size: 24px;
+                letter-spacing: 8px;
+                text-align: center;
+                padding: 12px 0;
+                margin: 10px 0 18px;
+                background: #0f1626;
+                color: #f7faff;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            /* responsive */
+            @media (max-width: 600px) {
+                .container {
+                    width: 100% !important;
+                    border-radius: 0 !important;
+                }
+                .content {
+                    padding: 18px !important;
+                }
+                .header {
+                    padding: 16px 18px !important;
+                }
+                .btn {
+                    display: block !important;
+                    width: 100% !important;
+                    text-align: center !important;
+                }
+            }
+        </style>
+    </head>
+
+    <body style="margin: 0; padding: 0; background: #0a0f1a">
+        <!-- preheader (hidden) -->
+        <div style="display: none; max-height: 0; overflow: hidden; mso-hide: all">{{ preheader|default:"" }}</div>
+
+        <div class="wrapper">
+            <table role="presentation" class="container" cellpadding="0" cellspacing="0" width="600">
+                <!-- header -->
+                <tr>
+                    <td class="header">
+                        <p class="brand">{{ brand_name|default:"NEXUS" }}</p>
+                        <p class="tagline">{{ brand_tagline|default:"Modern ERP • Time • Payouts" }}</p>
+                    </td>
+                </tr>
+
+                <!-- body -->
+                <tr>
+                    <td class="content">
+                        {% block body %}
+                        <h1 class="h1">{{ heading|default:"Hello!" }}</h1>
+                        <p class="lead">
+                            Replace this block in your child templates. Keep copy concise for best rendering across
+                            clients.
+                        </p>
+
+                        <!-- example button (remove in children) -->
+                        <a href="{{ primary_url|default:'#' }}" class="btn btn-primary">Primary Action</a>
+                        {% endblock %}
+                    </td>
+                </tr>
+
+                <!-- footer -->
+                <tr>
+                    <td style="background: #0f1626; border-top: 1px solid rgba(75, 108, 250, 0.25); padding: 0">
+                        {% include "emails/_footer.html" %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "emails/_base.html" %} {% block body %}
+<h1 class="h1">New contact form submission</h1>
+
+<table class="data-table">
+    <tr>
+        <th>Name</th>
+        <td>{{ name }}</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>{{ email }}</td>
+    </tr>
+    {% if subject %}
+    <tr>
+        <th>Subject</th>
+        <td>{{ subject }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+        <th>Message</th>
+        <td>{{ message }}</td>
+    </tr>
+    <tr>
+        <th>Submitted At</th>
+        <td>{{ submitted_at }}</td>
+    </tr>
+    <tr>
+        <th>IP Address</th>
+        <td>{{ ip }}</td>
+    </tr>
+</table>
+
+<p class="muted">This email was sent to your Nexus Solutions support inbox.</p>
+{% endblock %}
