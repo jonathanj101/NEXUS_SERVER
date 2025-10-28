@@ -73,6 +73,24 @@ INSTALLED_APPS = [
     "corsheaders",
 ]
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_THROTTLE_CLASSES": [
+        "api.throttles.GetInContactAPIThrottle",
+        "api.throttles.VerifyAuthorizedIPThrottle",
+        "api.throttles.VerifyTokenThrottle",
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "get_in_contact_rate": "500/day",
+        "verify_authorized_ip": "10/day",
+        "verify_token": "500/day",
+        "anon": "5/day",
+        "user": "1000/day",
+    },
+}
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
