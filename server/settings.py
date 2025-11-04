@@ -30,9 +30,13 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ["DEV"] if os.environ["DEV"] == True else os.environ["PROD"]
+#DEBUG = os.environ["DEV"] if os.environ["DEV"] == True else os.environ["PROD"]
+DEBUG = False
+#print(os.environ["DEV"])
+#print(os.environ["PROD"])
+#print(DEBUG)
 
-ALLOWED_HOSTS = ["localhost", "jjnexusolutions.com"]
+ALLOWED_HOSTS = ["localhost", "jjnexussolutions.com"]
 
 if not DEBUG:
     # --- HTTPS / Security Configuration ---
@@ -191,8 +195,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.environ["ENV_EMAIL_HOST"]
 EMAIL_PORT = os.environ["ENV_EMAIL_PORT"]
-EMAIL_HOST_USER = os.environ.get("ENV_EMAIL")
-EMAIL_HOST_PASSWORD = os.environ["ENV_EMAIL_PASSWORD"]
+#EMAIL_HOST_USER = os.environ.get("ENV_EMAIL")
+EMAIL_HOST_USER = os.environ.get("ENV_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ["ENV_HOST_PASSWORD"]
 EMAIL_USE_TLS = os.environ["ENV_EMAIL_TSL"]
 
 DEFAULT_FROM_EMAIL = os.getenv("ENV_DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
