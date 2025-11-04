@@ -10,7 +10,7 @@ from .models import EmailLog
 from .providers.base import AbstractEmailProvider
 from .providers.django_smtp import DjangoSMTPProvider
 
-# from .providers.sendgrid import SendGridProvider
+from .providers.sendgrid import SendGridProvider
 
 Attachment = Tuple[str, bytes, str]  # (filename, content_bytes, mimetype)
 
@@ -25,10 +25,10 @@ class EmailTemplateSpec:
 
 def get_provider() -> AbstractEmailProvider:
     provider = getattr(settings, "EMAIL_PROVIDER", "django").lower()
-    # if provider == "sendgrid":
-    #     return SendGridProvider()
-    # default
-    return DjangoSMTPProvider()
+    if provider == "sendgrid":
+        return SendGridProvider()
+    else:
+        return DjangoSMTPProvider()
 
 
 def render_email(template_name: str, context: Dict) -> Dict[str, str]:
@@ -71,6 +71,8 @@ def send_templated_email(
     )
     # print(context["user"])
     try:
+#        print("from email")
+#        print(from_email)
         result = provider.send(
             to=to,
             subject=subject,
