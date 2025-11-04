@@ -200,9 +200,17 @@ EMAIL_HOST_USER = os.environ.get("ENV_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ["ENV_HOST_PASSWORD"]
 EMAIL_USE_TLS = os.environ["ENV_EMAIL_TSL"]
 
-DEFAULT_FROM_EMAIL = os.getenv("ENV_DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+#DEFAULT_FROM_EMAIL = os.getenv("ENV_DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
+DEFAULT_FROM_EMAIL = os.getenv("ENV_EMAIL","")
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
-
+#print("email_host_user")
+#print(EMAIL_HOST_USER)
+#print("server email")
+#print(SERVER_EMAIL)
+#print("default email")
+#print(DEFAULT_FROM_EMAIL)
+#print("eng default from email")
+#print(os.getenv("ENV_DEFAULT_FROM_EMAIL","fail"))
 # print(EMAIL_HOST_USER)
 # print(EMAIL_HOST)
 
